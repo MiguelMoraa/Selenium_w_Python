@@ -1,0 +1,52 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.expected_conditions import visibility_of_element_located
+import time
+
+class TC01_Complete_Purchase:
+    driver = webdriver.Chrome(executable_path = r"C:\dChrome\chromedriver_win32.exe")
+    driver.get("https://www.saucedemo.com/")
+    usernameField = driver.find_element(By.ID, "user-name")
+    passwordField = driver.find_element(By.ID, "password")
+    enterButton = driver.find_element(By.ID, "login-button")
+    usernameField.send_keys("standard_user")
+    passwordField.send_keys("secret_sauce")
+    enterButton.click()
+    items = ("backpack", "bike-light", "bolt-t-shirt", "fleece-jacket")
+    for item in items:
+        product = driver.find_element(By.ID, "add-to-cart-sauce-labs-" + item)
+        product.click()
+    cartIcon = driver.find_element(By.CLASS_NAME, "shopping_cart_link")
+    cartIcon.click()
+    checkOutButton = driver.find_element(By.ID, "checkout")
+    checkOutButton.click()
+    firstNameField = driver.find_element(By.ID, "first-name")
+    secondNameField = driver.find_element(By.ID, "last-name")
+    zipCode = driver.find_element(By.ID, "postal-code")
+    continueButton = driver.find_element(By.ID, "continue")
+    firstNameField.send_keys("Standrad")
+    secondNameField.send_keys("User")
+    zipCode.send_keys("12345")
+    continueButton.click()
+    finishButton = driver.find_element(By.ID, "finish")
+    finishButton.click()
+    ponyLogo = driver.find_element(By.CLASS_NAME, 'pony_express')
+    visibility_of_element_located(ponyLogo)
+    time.sleep(5)
+    driver.close()
+
+class TC02_CheckoutfromProductsPage:
+    driver = webdriver.Chrome(executable_path = r"C:\dChrome\chromedriver_win32.exe")
+    driver.get("https://www.saucedemo.com/")
+    usernameField = driver.find_element(By.ID, "user-name")
+    passwordField = driver.find_element(By.ID, "password")
+    enterButton = driver.find_element(By.ID, "login-button")
+    usernameField.send_keys("standard_user")
+    passwordField.send_keys("secret_sauce")
+    enterButton.click()
+    burgerButton = driver.find_element(By.ID, "react-burger-menu-btn")
+    logoutOption = driver.find_element(By.CLASS_NAME, "app_logo")
+    burgerButton.click()
+    logoutOption.click()
+    time.sleep(5)
+    driver.close()
